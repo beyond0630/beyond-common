@@ -8,4 +8,8 @@ public interface IResult<T> {
 
     T getData();
 
+    long getElapsed();
+
+    void setElapsed(long elapsed);
+
 }

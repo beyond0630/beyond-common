@@ -20,6 +20,8 @@ public class PageResult<T> implements Paged<T>, IResult<List<T>> {
     private final int pageSize;
     private final int pageCount;
 
+    private long elapsed;
+
     protected PageResult(final int total, final int page, final int pageSize, final List<T> data) {
         this(total, page, pageSize, PageUtils.computePageCount(total, pageSize), data);
     }
@@ -67,6 +69,16 @@ public class PageResult<T> implements Paged<T>, IResult<List<T>> {
     @Override
     public int getPageCount() {
         return this.pageCount;
+    }
+
+    @Override
+    public long getElapsed() {
+        return elapsed;
+    }
+
+    @Override
+    public void setElapsed(final long elapsed) {
+        this.elapsed = elapsed;
     }
 
     public static <T> PageResult<T> make(final int total, final int page, final int pageSize, final List<T> data) {

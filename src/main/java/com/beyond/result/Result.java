@@ -15,6 +15,9 @@ public class Result<T> implements IResult<T> {
     private final String message;
     private final T data;
 
+    private long elapsed;
+
+
     protected Result() {
         this(Code.SUCCESS, null, null);
     }
@@ -38,6 +41,16 @@ public class Result<T> implements IResult<T> {
     @Override
     public T getData() {
         return data;
+    }
+
+    @Override
+    public long getElapsed() {
+        return elapsed;
+    }
+
+    @Override
+    public void setElapsed(final long elapsed) {
+        this.elapsed = elapsed;
     }
 
     public static <T> Result<T> make(final String code, final String message, final T data) {
