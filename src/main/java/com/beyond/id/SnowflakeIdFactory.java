@@ -3,7 +3,7 @@ package com.beyond.id;
 /**
  * @author beyond
  */
-public class SnowflakeIdFactory implements IdFactory {
+public class SnowflakeIdFactory implements IdFactory<Long> {
 
     /**
      * 开始时间戳，单位毫秒；这里是2020-01-01
@@ -117,7 +117,7 @@ public class SnowflakeIdFactory implements IdFactory {
      *
      * @return 返回一个长度位15的 long类型的数字
      */
-    public synchronized long generate() {
+    public synchronized Long generate() {
         long timestamp = timeGen();
         // 如果当前时间小于上一次 ID 生成的时间戳，说明发生时钟回拨，为保证ID不重复抛出异常。
         if (timestamp < lastTimestamp) {

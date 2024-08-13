@@ -17,6 +17,10 @@ public final class JsonUtils {
         return StandardObjectMapper.getInstance();
     }
 
+    private static ObjectMapper getCondensedObjectMapper() {
+        return CondensedObjectMapper.getInstance();
+    }
+
     public static String serialize(final Object value) {
         try {
             return getObjectMapper().writeValueAsString(value);
@@ -25,7 +29,23 @@ public final class JsonUtils {
         }
     }
 
+    public static String condensedSerialize(final Object value) {
+        try {
+            return getObjectMapper().writeValueAsString(value);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static byte[] serializeAsBytes(final Object value) {
+        try {
+            return getObjectMapper().writeValueAsBytes(value);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static byte[] condensedSerializeAsBytes(final Object value) {
         try {
             return getObjectMapper().writeValueAsBytes(value);
         } catch (IOException e) {

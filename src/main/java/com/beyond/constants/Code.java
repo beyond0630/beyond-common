@@ -9,7 +9,7 @@ public class Code {
         throw new UnsupportedOperationException();
     }
 
-    public static final String SUCCESS = "SUCCESS";
-    public static final String FAILURE = "FAILURE";
+    public static final String SUCCESS = "SUCC";
+    public static final String FAILURE = "FAIL";
 
 }
