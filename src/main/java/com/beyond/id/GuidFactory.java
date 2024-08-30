@@ -49,17 +49,15 @@ public class GuidFactory implements IdFactory<String> {
 
         byte[] bytes = getBytes(ts);
 
-        String guid = Hex.encodeHexString(Arrays.copyOfRange(randomBytes, 0, 4)) +
+        return Hex.encodeHexString(Arrays.copyOfRange(randomBytes, 0, 4), false) +
             "-" +
-            Hex.encodeHexString(Arrays.copyOfRange(randomBytes, 4, 6)) +
+            Hex.encodeHexString(Arrays.copyOfRange(randomBytes, 4, 6), false) +
             "-" +
-            Hex.encodeHexString(Arrays.copyOfRange(randomBytes, 6, 8)) +
+            Hex.encodeHexString(Arrays.copyOfRange(randomBytes, 6, 8), false) +
             "-" +
-            Hex.encodeHexString(Arrays.copyOfRange(randomBytes, 8, 10)) +
+            Hex.encodeHexString(Arrays.copyOfRange(randomBytes, 8, 10), false) +
             "-" +
-            Hex.encodeHexString(Arrays.copyOfRange(bytes, 2, 8));
-
-        return guid.toUpperCase();
+            Hex.encodeHexString(Arrays.copyOfRange(bytes, 2, 8), false);
     }
 
     /**
@@ -82,24 +80,8 @@ public class GuidFactory implements IdFactory<String> {
     }
 
     private long getSeqGuidSeed() {
-        long nowMicros = System.currentTimeMillis() * 1000L; // Convert to microseconds
+        long nowMicros = System.nanoTime() / 10000; // Convert to microseconds
         return nowMicros - JAN_FIRST_2020;
-    }
-
-    /**
-     * 反转数组
-     *
-     * @param bytes byte[]
-     */
-    public void reverse(byte[] bytes) {
-        int arrayLength = bytes.length;
-        int size = arrayLength / 2;
-
-        for (int i = 0; i < size; i++) {
-            byte temp = bytes[i];
-            bytes[i] = bytes[arrayLength - i - 1];
-            bytes[arrayLength - i - 1] = temp;
-        }
     }
 
 }
